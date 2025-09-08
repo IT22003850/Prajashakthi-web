@@ -27,7 +27,7 @@ const Header = () => {
             <a href="#" className="hover:underline font-semibold">English</a>
           </div>
 
-          {/* Social Media and Date */}
+          {/* Social Media */}
           <div className="flex items-center space-x-6">
             <div className="flex items-center space-x-3">
               <span>Follow Us:</span>
@@ -43,28 +43,46 @@ const Header = () => {
       {/* Main Navigation Bar */}
       <nav className="bg-white shadow-md">
         <div className="container mx-auto flex justify-between items-center px-4 py-3">
-          {/* Logos */}
+          {/* Logo */}
           <div className="flex items-center space-x-4">
-            {/* Replace these with your actual logo files */}
             <img src="logo.jpg" alt="Presidential Secretariat Logo" className="h-16" />
           </div>
 
-          {/* Navigation Links */}
-          <ul className="flex items-center space-x-8 font-medium text-amber-700">
-            {navLinks.map((link) => (
-              <li key={link.name}>
-                <a
-                  href={link.href}
-                  className={`flex items-center space-x-1 transition-colors duration-200 ${
-                    link.active ? 'text-amber-800 font-bold' : 'hover:text-amber-800'
-                  }`}
-                >
-                  <span>{link.name}</span>
-                  {link.hasDropdown && <MdKeyboardArrowDown />}
-                </a>
-              </li>
-            ))}
-          </ul>
+          {/* Right side: Navigation Links and Buttons */}
+          <div className="flex items-center space-x-8">
+            {/* Navigation Links */}
+            <ul className="flex items-center space-x-8 font-medium text-amber-700">
+              {navLinks.map((link) => (
+                <li key={link.name}>
+                  <a
+                    href={link.href}
+                    className={`flex items-center space-x-1 transition-colors duration-200 ${
+                      link.active ? 'text-amber-800 font-bold' : 'hover:text-amber-800'
+                    }`}
+                  >
+                    <span>{link.name}</span>
+                    {link.hasDropdown && <MdKeyboardArrowDown />}
+                  </a>
+                </li>
+              ))}
+            </ul>
+
+            {/* Action Buttons */}
+            <div className="flex items-center space-x-4">
+              <a
+                href="#"
+                className="bg-amber-700 text-white font-semibold px-5 py-2 rounded-md hover:bg-amber-800 transition-colors duration-200"
+              >
+                Get Involved
+              </a>
+              <a
+                href="#"
+                className="bg-[#932E40] text-white font-semibold px-5 py-2 rounded-md hover:bg-[#7f2837] transition-colors duration-200"
+              >
+                Join Us
+              </a>
+            </div>
+          </div>
         </div>
       </nav>
     </header>
