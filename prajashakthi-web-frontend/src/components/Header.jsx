@@ -1,25 +1,22 @@
 import React from 'react';
 
 // Import icons from the react-icons library
-import { FaFacebookF, FaInstagram, FaYoutube, FaTwitter, FaLinkedin } from 'react-icons/fa';
-import { IoCalendarOutline } from "react-icons/io5";
+import { FaFacebookF, FaInstagram, FaTwitter, FaLinkedin } from 'react-icons/fa';
 import { MdKeyboardArrowDown } from "react-icons/md";
 
 const Header = () => {
   // Navigation links data for easier mapping
   const navLinks = [
     { name: 'Home', href: '#', active: true, hasDropdown: false },
-    { name: 'President', href: '#', active: false, hasDropdown: true },
-    { name: 'Administration', href: '#', active: false, hasDropdown: true },
+    { name: 'About', href: '#', active: false, hasDropdown: false },
     { name: 'News', href: '#', active: false, hasDropdown: false },
-    { name: 'Downloads', href: '#', active: false, hasDropdown: true },
     { name: 'Contact Us', href: '#', active: false, hasDropdown: false },
   ];
 
   return (
     <header className="w-full">
       {/* Top Bar */}
-      <div className="bg-[#003366] text-white">
+      <div className="bg-[#932E40] text-white">
         <div className="container mx-auto flex justify-between items-center px-4 py-2 text-sm">
           {/* Language Selection */}
           <div className="flex items-center space-x-2">
@@ -53,13 +50,13 @@ const Header = () => {
           </div>
 
           {/* Navigation Links */}
-          <ul className="flex items-center space-x-8 font-medium text-gray-700">
+          <ul className="flex items-center space-x-8 font-medium text-amber-700">
             {navLinks.map((link) => (
               <li key={link.name}>
                 <a
                   href={link.href}
                   className={`flex items-center space-x-1 transition-colors duration-200 ${
-                    link.active ? 'text-blue-600 font-bold' : 'hover:text-blue-600'
+                    link.active ? 'text-amber-800 font-bold' : 'hover:text-amber-800'
                   }`}
                 >
                   <span>{link.name}</span>
