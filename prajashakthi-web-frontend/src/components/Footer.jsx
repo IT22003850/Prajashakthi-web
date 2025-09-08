@@ -106,7 +106,7 @@ const Footer = () => {
 
                 {/* Copyright Section */}
                 <div className="mt-12 pt-8 border-t border-gray-700 text-center text-sm text-white">
-                    <p>Copyright © 2025 by Prajashakthi Secretariat. All rights reserved.</p>
+                    <p>Copyright © {new Date().getFullYear()} by Prajashakthi Secretariat. All rights reserved.</p>
                 </div>
             </div>
 
