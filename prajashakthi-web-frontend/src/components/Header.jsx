@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 // Import icons from the react-icons library
-import { FaFacebookF, FaInstagram, FaTwitter, FaLinkedin } from 'react-icons/fa';
+import { FaFacebookF, FaInstagram, FaTwitter, FaLinkedin, FaUserCircle } from 'react-icons/fa';
 import { MdKeyboardArrowDown } from "react-icons/md";
 
 const Header = () => {
+  // State to manage the visibility of the profile dropdown
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  
+  // Ref to detect clicks outside the dropdown
+  const profileMenuRef = useRef(null);
+
   // Navigation links data for easier mapping
   const navLinks = [
     { name: 'Home', href: '#', active: true, hasDropdown: false },
@@ -12,6 +18,22 @@ const Header = () => {
     { name: 'News', href: '#', active: false, hasDropdown: false },
     { name: 'Contact Us', href: '#', active: false, hasDropdown: false },
   ];
+  
+  // Effect to handle clicks outside the profile menu to close it
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (profileMenuRef.current && !profileMenuRef.current.contains(event.target)) {
+        setIsProfileOpen(false);
+      }
+    };
+    // Add event listener when the component mounts
+    document.addEventListener('mousedown', handleClickOutside);
+    // Remove event listener on cleanup
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
 
   return (
     <header className="w-full">
@@ -48,10 +70,10 @@ const Header = () => {
             <img src="logo.jpg" alt="Presidential Secretariat Logo" className="h-16" />
           </div>
 
-          {/* Right side: Navigation Links and Buttons */}
+          {/* Right side: Navigation Links, Buttons, and Profile Icon */}
           <div className="flex items-center space-x-8">
             {/* Navigation Links */}
-            <ul className="flex items-center space-x-8 font-medium text-amber-700">
+            <ul className="hidden md:flex items-center space-x-8 font-medium text-amber-700">
               {navLinks.map((link) => (
                 <li key={link.name}>
                   <a
@@ -68,19 +90,37 @@ const Header = () => {
             </ul>
 
             {/* Action Buttons */}
-            <div className="flex items-center space-x-4">
-              <a
-                href="#"
-                className="bg-amber-700 text-white font-semibold px-5 py-2 rounded-md hover:bg-amber-800 transition-colors duration-200"
-              >
-                Get Involved
-              </a>
+            <div className="hidden sm:flex items-center space-x-4">
               <a
                 href="#"
                 className="bg-[#932E40] text-white font-semibold px-5 py-2 rounded-md hover:bg-[#7f2837] transition-colors duration-200"
               >
                 Join Us
               </a>
+            </div>
+            
+            {/* Divider */}
+            <div className="hidden sm:block h-8 w-px bg-gray-200"></div>
+
+            {/* Profile Icon and Dropdown */}
+            <div className="relative" ref={profileMenuRef}>
+              <button 
+                onClick={() => setIsProfileOpen(!isProfileOpen)}
+                className="flex items-center space-x-2 text-gray-600 hover:text-amber-800"
+              >
+                <FaUserCircle size={28} />
+                <MdKeyboardArrowDown className={`transition-transform duration-200 ${isProfileOpen ? 'rotate-180' : ''}`} />
+              </button>
+
+              {/* Dropdown Menu */}
+              {isProfileOpen && (
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border">
+                  <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">My Account</a>
+                  <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
+                  <div className="border-t my-1"></div>
+                  <a href="#" className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100">Logout</a>
+                </div>
+              )}
             </div>
           </div>
         </div>
