@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import AnimatedSection from '../components/AnimatedSection';
+import { allNewsData } from '../data/newsData';
 
 // Import icons
 import {
@@ -30,12 +32,6 @@ const partnerCards = [
     { icon: <FaFlask size={28} />, title: 'Research', description: 'Generating insights to guide decision-making and strengthen community development initiatives.' },
     { icon: <FaFileContract size={28} />, title: 'Circulars and Guidelines', description: 'Official circulars, policies, and guidelines in one place. Stay updated with latest procedures.' },
 ];
-const dummyNewsData = [
-    { id: 1, image: '/news_img_1.jpg', date: '08 SEPTEMBER 2025', title: 'Prajashakthi - First Training of Trainers Programme', link: '#' },
-    { id: 2, image: '/news_img_2.jpg', date: '25 AUGUST 2025', title: 'The National Movement for Eradicating Poverty was launched', link: '#' },
-    { id: 3, image: '/news_img_3.jpg', date: '12 AUGUST 2025', title: 'Media Heads Briefed on \'Praja Shakthi\' National Programme', link: '#' },
-];
-
 
 const Home = () => {
   const [articles, setArticles] = useState([]);
@@ -44,7 +40,7 @@ const Home = () => {
   useEffect(() => {
     const fetchNews = () => {
       setTimeout(() => {
-        setArticles(dummyNewsData);
+        setArticles(allNewsData.slice(0, 3));
         setIsLoading(false);
       }, 1500);
     };
@@ -96,7 +92,13 @@ const Home = () => {
                     <div className="relative w-full max-w-lg mx-auto">
                         <div className="absolute -top-8 -right-8 w-full h-full rounded-full bg-gradient-to-br from-red-100 to-amber-100"></div>
                         <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-gradient-to-br from-[#932E40] to-red-500 shadow-lg"></div>
-                        <img src="/home_img_2.avif" alt="Community members working together" className="relative rounded-full w-full h-auto aspect-square object-cover shadow-2xl" />
+                        <div className="relative w-full pb-[100%] rounded-full overflow-hidden shadow-2xl">
+                          <img 
+                            src="/home_img_2.avif" 
+                            alt="Community members working together" 
+                            className="absolute inset-0 w-full h-full object-cover" 
+                          />
+                        </div>
                         <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-gradient-to-br from-[#932E40] to-red-700 text-white px-8 py-5 rounded-xl shadow-lg text-center transform hover:scale-105 transition-transform duration-300">
                             <p className="text-4xl font-extrabold">14008</p>
                             <p className="text-xs uppercase tracking-widest font-semibold">CDCs</p>
@@ -107,9 +109,9 @@ const Home = () => {
                         <h2 className="text-4xl md:text-5xl font-extrabold text-gray-800 mb-5 leading-tight">What is Prajashakthi?</h2>
                         <p className="text-gray-700 leading-relaxed mb-8">
                             "Prajashakthi is a government-led national movement that integrates all ministries and communities to eradicate poverty through inclusive, lifecycle-based and participatory development."
-                            <a href="#" className="text-[#932E40] font-bold inline-flex items-center ml-2 group">
+                            <Link to="/about" className="text-[#932E40] font-bold inline-flex items-center ml-2 group">
                                 Read more <FaArrowRight className="ml-1 transition-transform group-hover:translate-x-1" />
-                            </a>
+                            </Link>
                         </p>
                         <div className="space-y-8">
                             {[
@@ -156,7 +158,8 @@ const Home = () => {
 
         {/* Be a Partner Section */}
         <AnimatedSection className="relative py-28">
-            <div className="absolute inset-0 bg-orange-800"></div>
+            <img src="/partner-bg.jpg" alt="Community background" className="absolute inset-0 w-full h-full object-cover"/>
+            <div className="absolute inset-0 bg-black/50"></div>
             <div className="relative container mx-auto px-4 text-center text-white">
                 <p className="text-sm font-bold uppercase tracking-widest mb-4">Be a Partner</p>
                 <h2 className="text-5xl md:text-6xl font-extrabold">Together, we make a difference</h2>
@@ -187,8 +190,10 @@ const Home = () => {
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                       {articles.map((article) => (
-                          <a key={article.id} href={article.link} className="block bg-white rounded-2xl shadow-lg overflow-hidden group transform hover:-translate-y-2 transition-all duration-300">
-                              <div className="overflow-hidden"><img src={article.image} alt={article.title} className="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-300" /></div>
+                          <Link key={article.id} to={`/news/${article.slug}`} className="block bg-white rounded-2xl shadow-lg overflow-hidden group transform hover:-translate-y-2 transition-all duration-300">
+                              <div className="overflow-hidden">
+                                <img src={article.featuredImage} alt={article.title} className="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-300" />
+                              </div>
                               <div className="p-6">
                                   <p className="text-xs text-gray-500 uppercase tracking-wider mb-2 font-semibold">{article.date}</p>
                                   <h3 className="text-lg font-bold text-gray-800 mb-4 h-16 group-hover:text-[#932E40] transition-colors duration-200">{article.title}</h3>
@@ -196,7 +201,7 @@ const Home = () => {
                                       READ MORE <FaArrowRight className="ml-2 transition-transform group-hover:translate-x-1" />
                                   </span>
                               </div>
-                          </a>
+                          </Link>
                       ))}
                   </div>
                 )}
