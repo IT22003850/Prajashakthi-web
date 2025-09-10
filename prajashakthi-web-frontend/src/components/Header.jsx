@@ -13,10 +13,10 @@ const Header = () => {
 
   // Navigation links data for easier mapping
   const navLinks = [
-    { name: 'Home', href: '#', active: true, hasDropdown: false },
-    { name: 'About', href: '#', active: false, hasDropdown: false },
-    { name: 'News', href: '#', active: false, hasDropdown: false },
-    { name: 'Contact Us', href: '#', active: false, hasDropdown: false },
+    { name: 'Home', href: '/', active: true, hasDropdown: false },
+    { name: 'About', href: '/about', active: false, hasDropdown: false },
+    { name: 'News', href: '/news', active: false, hasDropdown: false },
+    { name: 'Contact Us', href: '/contact', active: false, hasDropdown: false },
   ];
   
   // Effect to handle clicks outside the profile menu to close it
