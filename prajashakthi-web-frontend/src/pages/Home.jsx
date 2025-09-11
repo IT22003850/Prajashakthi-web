@@ -14,9 +14,9 @@ import {
 
 // --- DUMMY DATA SOURCES ---
 const infoCards = [
-    { icon: <FaSearchLocation size={48} />, title: 'Find Your CDC', description: 'Discover and connect with your Community Development Council' },
-    { icon: <FaFileAlt size={48} />, title: 'Explore Proposals', description: 'Discover local development plans and priorities submitted by your CDC.' },
-    { icon: <FaHandsHelping size={48} />, title: 'Get involved', description: 'Submit ideas, volunteer, or support your CDC\'s initiatives.' },
+    { icon: <FaSearchLocation size={48} />, title: 'Find Your CDC', description: 'Discover and connect with your Community Development Council', route:'#' },
+    { icon: <FaFileAlt size={48} />, title: 'Explore Proposals', description: 'Discover local development plans and priorities submitted by your CDC.', route:'#' },
+    { icon: <FaHandsHelping size={48} />, title: 'Get involved', description: 'Submit ideas, volunteer, or support your CDC\'s initiatives.', route:'/get-involved' } ,
 ];
 const focusAreas = [
     { num: '01', icon: <FaUsers size={32} />, title: 'Social Environment', description: 'Safe, inclusive, and supportive village environment.' },
@@ -75,11 +75,13 @@ const Home = () => {
             <div className="container mx-auto px-4">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {infoCards.map((card, index) => (
+                        <Link to={card.route} >
                         <div key={index} className="bg-white p-8 rounded-2xl shadow-xl border border-gray-100 text-center flex flex-col items-center transform hover:-translate-y-2 transition-transform duration-300">
                             <div className="mb-5 text-[#932E40]">{card.icon}</div>
                             <h3 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-teal-600 to-cyan-500 mb-2">{card.title}</h3>
                             <p className="text-gray-600 leading-relaxed">{card.description}</p>
                         </div>
+                        </Link>
                     ))}
                 </div>
             </div>

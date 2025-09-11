@@ -7,6 +7,7 @@ import News from "./pages/News";
 import NewsDetail from "./pages/NewsDetail";
 import { Routes, Route } from 'react-router-dom';
 import Contact from "./pages/Contact";
+import GetInvolved from "./pages/GetInvolved";
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
       <Route path="/contact" element={<Contact/>} />
       <Route path="/news" element={<News />} />
       <Route path="/news/:slug" element={<NewsDetail />} /> 
+      <Route path="/get-involved" element={<GetInvolved />} /> 
       <Route path="*" element={<NotFound/>} />
     </Routes>
   );
